@@ -1,0 +1,54 @@
+@import ./vars
+
+.left, .right
+    position: fixed
+    top: $pad * .5
+    &.left
+        left: $pad
+    &.right
+        right: $pad
+
+    color: $L-primary
+    &.dark
+        color: $D-primary
+    font-size: 1.2rem
+
+    display: flex
+    flex-flow: row nowrap
+
+    &.right > *
+        margin-left: .9em
+    &.left > *
+        margin-right: .9em
+
+.button
+    position: relative
+    & *:not(.tooltip):hover
+        cursor: pointer
+        color: $L-selected
+        &.dark
+            color: $D-selected
+
+.tooltip
+    position: absolute
+    left: 50%
+    top: 4em
+
+    transform: translateX(-50%)
+    width: 5em
+    margin: auto
+
+    opacity: 0
+    user-select: none
+    color: $L-primary
+    &.dark
+        color: $D-primary
+    text-align: center
+    font-size: 0.7rem
+
+    transition: opacity .2s, top .2s
+
+    .button *:not(.tooltip):hover + &
+        opacity: 100%
+        top: 3em
+        

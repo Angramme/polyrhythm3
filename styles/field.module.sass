@@ -1,0 +1,42 @@
+@import ./vars
+    
+.field
+    color: $L-primary
+    background: $L-mid-secondary
+    &.dark
+        color: $D-primary
+        background: $D-mid-secondary
+    border: solid 1px rgba(0, 0, 0, 0)
+    padding: 0.5em
+    border-radius: $border-radius
+    font-size: .9rem
+    width: 100%
+    max-width: 100%
+    &:disabled
+        cursor: unset
+        color: $L-secondary
+        &.dark
+            color: $D-secondary
+        &:hover
+            background: $L-mid-secondary
+            &.dark
+                background: $D-mid-secondary
+    &:focus
+        outline: none
+
+    &.wrong
+        border-color: red
+
+.type-button
+    cursor: pointer
+    width: unset
+    &:hover
+        background: $L-selected 
+        &.dark
+            background: $D-selected 
+
+.title
+    margin-bottom: 0.5em
+    color: $L-primary
+    &.dark
+        color: $D-primary

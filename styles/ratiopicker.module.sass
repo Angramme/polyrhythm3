@@ -1,0 +1,37 @@
+@import ./vars
+    
+.container
+    display: flex
+    align-items: baseline
+
+.ratios
+    // max-width: calc(100% - 2em)
+    overflow-y: hidden
+    overflow-x: auto
+    display: flex
+    & > div
+        display: flex
+        align-items: baseline
+
+.field
+    width: 3em
+    height: 100%
+    & *
+        text-align: center
+
+.add_btn
+    width: 1.5em
+    height: 1.5em
+    text-align: center
+
+    cursor: pointer
+    &:hover
+        color: $L-selected
+        &.dark
+            color: $D-selected
+
+.delimiter
+    height: 100%
+    width: 1em
+    font-weight: bold
+    text-align: center

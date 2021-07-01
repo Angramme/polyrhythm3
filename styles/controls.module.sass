@@ -1,0 +1,54 @@
+@import ./vars
+
+.container
+    position: relative
+    padding: $pad * 0.5
+    border-radius: $border-radius 
+    box-shadow: $box-shadow
+    background: $L-secondary
+    color: $L-primary
+    &.dark
+        background: $D-secondary
+        color: $D-primary
+
+.title
+    font-weight: bold
+    font-size: 1.4rem
+    margin-bottom: .8em
+
+.table th
+    text-align: left
+    font-weight: normal
+    padding-right: 1em
+
+.button
+    color: $L-primary
+    background: $L-mid-secondary
+    &.dark
+        color: $D-primary
+        background: $D-mid-secondary
+    padding: 0.5em
+    border-radius: $border-radius
+    font-size: .9rem
+
+.transport_bar
+    display: flex
+    flex-flow: row wrap
+    align-items: baseline
+    justify-content: center
+
+.transport_button, .settings_button
+    cursor: pointer
+    font-size: 1.4rem
+    &:hover
+        color: $L-selected
+    &.dark:hover
+        color: $D-selected
+    color: $L-primary
+    &.dark
+        color: $D-primary
+
+.settings_button
+    position: absolute
+    right: $pad
+

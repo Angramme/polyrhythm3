@@ -1,0 +1,26 @@
+@import ./vars
+
+.container
+    padding: $pad
+    border-radius: $border-radius 
+    box-shadow: $box-shadow
+    background: $L-secondary
+    color: $L-primary
+    &.dark
+        background: $D-secondary
+        color: $D-primary
+
+.flex_container
+    display: flex
+    flex-flow: row wrap
+    justify-content: space-between   
+
+.single_fields
+    & input
+        width: 5em
+
+.table th
+    width: 6em
+    text-align: left
+    font-weight: normal
+    padding-right: 1em

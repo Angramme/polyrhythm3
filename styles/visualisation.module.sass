@@ -1,0 +1,177 @@
+@use "sass:color"
+
+@import ./vars
+
+$height: 25vh
+
+.container
+    background: $L-secondary
+    color: $L-primary
+    &.dark
+        background: $D-secondary
+        color: $D-primary
+    border-radius: $border-radius
+    box-shadow: $box-shadow
+
+    width: 100%
+    height: $height
+
+    padding: 0 $pad
+
+    display: flex
+    flex-flow: row nowrap
+    justify-content: space-between
+
+.section
+    height: 100%
+    width: 100%
+
+    flex-grow: 0
+    flex-shrink: 0
+
+    display: flex
+    flex-flow: row nowrap
+    justify-content: space-between
+
+    &.current
+        border: solid 3.5px $L-selected
+        &.dark
+            border: solid 3.5px $D-selected
+
+.section_part
+    position: relative
+
+    padding: $pad 0
+
+    width: 100%
+    height: 100%
+
+    flex-grow: 0
+    flex-shrink: 1
+
+    display: flex
+    flex-flow: column nowrap
+    justify-content: space-between
+
+    // &:nth-child(even)
+    &.even
+        background: $L-mid-secondary
+        & .repeat_line
+            border-color: $L-secondary
+            color: $L-secondary
+        & .scale_corner
+            color: $L-secondary
+        &.dark
+            background: $D-mid-secondary
+            & .repeat_line
+                border-color: $D-secondary
+                color: $D-secondary
+            & .scale_corner
+                color: $D-secondary
+
+    & .repeat_line
+        position: absolute
+        bottom: 0
+        left: 0
+        right: 0
+        height: $pad
+
+        border-top: dashed 2px $L-mid-secondary
+        color: $L-mid-secondary
+        &.dark
+            border-top: dashed 2px $D-mid-secondary
+            color: $D-mid-secondary
+        padding-left: 0.1em
+        font-size: 1.1rem
+        font-weight: bold
+
+        display: none
+    &.repeated .repeat_line
+        display: block
+
+    & .scale_corner
+        position: absolute
+        bottom: 0.3em
+        left: 0
+        font-size: 1.2rem
+        & span
+            font-size: 0.9rem
+        font-weight: bold
+        color: $L-mid-secondary
+        &.dark
+            color: $D-mid-secondary
+
+.row
+    flex-grow: 0
+    flex-shrink: 1
+    height: 100%
+
+    display: flex
+    flex-flow: row nowrap
+
+.dot
+    flex-grow: 0
+    flex-shrink: 1
+    width: 100%
+
+    position: relative
+    & *
+        // allow squishing
+        position: absolute
+        left: 0
+        top: 0
+
+        width: .4rem
+        height: 100%
+    
+        border-radius: .1rem
+
+    height: 1rem
+    &.sub_dot
+        height: .5rem
+
+    @for $i from 1 through length($L-row-colors)
+        *:nth-child(#{$i}) > & *
+            background-color: nth($L-row-colors, $i)
+            &.dark
+                background-color: nth($D-row-colors, $i)
+        .repeated *:nth-child(#{$i}) > & *
+            background-color: color.scale(nth($L-row-colors, $i), $saturation: -80%, $lightness: -20%)
+            &.dark
+                background-color: color.scale(nth($D-row-colors, $i), $saturation: -80%, $lightness: -20%)
+        
+.add_btn
+    z-index: 2
+    position: absolute
+    right: 0
+    top: 0
+    bottom: 0
+
+    margin: auto
+    width: $pad
+    height: 1.2em
+
+    font-size: $pad
+    text-align: center
+    cursor: pointer
+    color: $L-primary
+    &:hover
+        color: $L-selected
+    &.dark
+        color: $D-primary
+        &:hover
+            color: $D-selected
+
+.bar_parent
+    position: absolute
+    top: 0
+    left: $pad
+    right: $pad
+
+.bar
+    z-index: 10
+    position: absolute
+    height: $height
+    border-left: solid 1px $L-primary
+    &.dark
+        border-left: solid 1px $D-primary
