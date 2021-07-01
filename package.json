@@ -8,7 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "favicon-component": "^1.0.3",
     "just-clone": "^3.2.1",
     "next": "11.0.1",
     "next-dark-mode": "^3.0.0",

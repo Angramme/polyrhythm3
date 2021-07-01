@@ -9,7 +9,7 @@ import CTX from '../lib/global_context'
 
 import { queryToSections } from "../lib/serialization";
 import { sectionsToImgURL } from "../lib/sectionsToImgURL";
-import favicon from 'favicon-component'
+import favicon from '../lib/favicon'
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/dist/client/router";
