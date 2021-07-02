@@ -2,6 +2,7 @@
 ## Polyrhythm 3
 > This is an alpha of the new release of polyrhythm metronome, it is in the test phase right now but will soon replace the current polyrhythm. 
 
+
 ## Tutorial
 
 The UI is divided into blocks, the first block is the visualization block, here you can see your "sections" displayed in a midi-esque fashion.
