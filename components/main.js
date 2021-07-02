@@ -53,9 +53,13 @@ export default function Main(){
         setSections(queryToSections(router.query));
         setBpm(Number(router.query.bpm));
 
-        router.push({
-            query:{}
-        }, undefined, { shallow:true });
+        // router.push({
+        //     query:{},
+        // }, undefined, { shallow:true });
+
+        // router.push(window.location.origin + window.location.pathname, undefined, { shallow:true });
+
+        window.history.replaceState({}, document.title, window.location.pathname);
     }, [router.query]);
 
     // play / pause
