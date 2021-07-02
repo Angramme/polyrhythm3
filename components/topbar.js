@@ -57,7 +57,7 @@ export default function Social({
             <div className={styles.tooltip}>share your rhythm</div>
         </div>
         <div className={styles.button}>            
-            <SiMidi style={{verticalAlign:'middle'}}/> 
+            <SiMidi style={{verticalAlign:'middle', cursor:'not-allowed'}}/> 
             <div className={styles.tooltip}>export midi</div>
         </div>
         <div className={styles.button}>
