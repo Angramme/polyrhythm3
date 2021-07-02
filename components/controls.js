@@ -47,7 +47,7 @@ export default function Controls({
                     />
             </div>
             <div 
-                className={styles.settings_button}
+                className={styles.settings_button +(editMode=='instrument' ? ' '+styles.edit_mode : '')}
                 onClick={()=>setEditMode(editMode == 'section' ? 'instrument' : 'section')}>
                 <RiSoundModuleLine style={{verticalAlign:'middle'}}/>
             </div>

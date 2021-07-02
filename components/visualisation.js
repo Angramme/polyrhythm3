@@ -7,6 +7,7 @@ import { useTheme } from '../hooks/useTheme';
 export default function Visualisation({
         sections: [sections, setSections], 
         curSection: [curSection, setCurSection], 
+        editMode: [editMode],
         defaultSection
     }){
     const styles = useTheme(require('../styles/visualisation.module.sass'));
@@ -53,7 +54,8 @@ export default function Visualisation({
                 key={'section'+section_i} 
                 className={
                     styles.section 
-                    +(section_i == curSection && sections.length > 1 ?  ' '+styles.current: '')}
+                    +(section_i == curSection && sections.length > 1 && editMode=='section' ?  
+                        ' '+styles.current: '')}
                 style={{
                     flexBasis: `${100*S.length*(S.repeat+1)/tlength}%`,
                 }}

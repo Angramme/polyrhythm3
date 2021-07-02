@@ -130,6 +130,16 @@ $height: 25vh
     &.sub_dot
         height: .5rem
 
+    // default color is the first color
+    & *
+        background-color: nth($L-row-colors, 1)
+        &.dark
+            background-color: nth($D-row-colors, 1)
+    .repeated & *
+        background-color: color.scale(nth($L-row-colors, 1), $saturation: -80%, $lightness: -20%)
+        &.dark
+            background-color: color.scale(nth($D-row-colors, 1), $saturation: -80%, $lightness: -20%)
+    // apply colors based on row number
     @for $i from 1 through length($L-row-colors)
         *:nth-child(#{$i}) > & *
             background-color: nth($L-row-colors, $i)
