@@ -74,6 +74,7 @@ export default function Main(){
 
         const onclick = ()=>{
             Tone.start();
+            Tone.context.resume();
         };
         window.addEventListener('click', onclick);
         return function cleanup(){
@@ -124,7 +125,7 @@ export default function Main(){
     return <div className={styles.container}>
         <Visualisation 
             sections={[sections, setSections]} 
-            curSection={[curSection, setCurSection]} 
+            curSection={[curSection, setCurSection]}
             bpm={[bpm, setBpm]}
             defaultSection={make_default_section}
             editMode={[editMode, setEditMode]}/>
