@@ -11,7 +11,7 @@ import { sectionsToImgURL } from "../lib/sectionsToImgURL";
 import favicon from '../lib/favicon'
 import { init as initSynths, updateInstruments, getInstruments, getNewInstrument } from '../lib/instruments'
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { useRouter } from "next/dist/client/router";
 import { useTheme } from "../hooks/useTheme";
 
@@ -80,9 +80,12 @@ export default function Main(){
     }, []);
 
     // init synths
+    const number_of_tracks = useMemo(
+        ()=>sections.reduce((s, v)=>Math.max(s, v.ratios.length), -1), 
+        [sections]);
     useEffect(()=>{
-        return initSynths(instruments);
-    }, [instruments]);
+        return initSynths(instruments, number_of_tracks);
+    }, [instruments, number_of_tracks]);
 
     // sections to actual sound
     useEffect(()=>{
