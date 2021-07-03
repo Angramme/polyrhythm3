@@ -24,6 +24,8 @@ export default function Visualisation({
     useEffect(()=>{
         const Tone = require('tone');
         
+        const total = (Tone.Time('1m').toTicks()*tlength);
+
         let STOP = false;
         const loop = ()=>{
             if(!bar.current) return;
@@ -31,7 +33,7 @@ export default function Visualisation({
             bar.current.style.left = `${
                 Math.min(100, 100
                 *Tone.Time(Tone.Transport.position).toTicks()
-                /(Tone.Time('1m').toTicks()*tlength))
+                /total)
             }%`;
             if(!STOP) requestAnimationFrame(loop);
         };

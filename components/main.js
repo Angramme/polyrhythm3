@@ -68,8 +68,10 @@ export default function Main(){
         Tone.Transport.bpm.rampTo(bpm, .2); // seconds
     }, [bpm]);
 
-    // context startup
+    // context startup and setup
     useEffect(()=>{
+        Tone.setContext(new Tone.Context({ latencyHint : "playback" })); // improve performance...
+
         const onclick = ()=>{
             Tone.start();
         };
