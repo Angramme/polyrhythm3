@@ -125,6 +125,7 @@ export default function Main(){
         <Visualisation 
             sections={[sections, setSections]} 
             curSection={[curSection, setCurSection]} 
+            bpm={[bpm, setBpm]}
             defaultSection={make_default_section}
             editMode={[editMode, setEditMode]}/>
         <Controls
