@@ -1,19 +1,18 @@
 import {AiOutlinePlus, AiOutlineColumnWidth} from 'react-icons/ai'
 import {TiArrowRepeat} from 'react-icons/ti'
 
-import { useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useTheme } from '../hooks/useTheme';
+import useStore from '../hooks/useStore';
+import shallow from 'zustand/shallow'
 
 const Tone = require('tone');
 
 
-export default function Visualisation({
-        sections: [sections, setSections], 
-        curSection: [curSection, setCurSection], 
-        editMode: [editMode],
-        bpm: [bpm],
-        defaultSection
-    }){
+export default function Visualisation(){
+    const [sections, addNewSection, curSection, setCurSection, bpm, editMode] = useStore(
+        useCallback(state => [state.sections, state.addSection, state.curSection, state.setCurSection, state.bpm, state.editMode], []), shallow);
+
     const styles = useTheme(require('../styles/visualisation.module.sass'));
 
     const nrows = useMemo(
@@ -22,23 +21,28 @@ export default function Visualisation({
     const tlength = useMemo(()=>sections.reduce((s, c)=>s+c.length*(1+c.repeat), 0), 
         [sections]);
 
-    const addNewSection = ()=>setSections([...sections, {...defaultSection()}]);
+    // const addNewSection = ()=>setSections([...sections, {...getDefaultSection()}]);
 
     const bar = useRef();
     const bar_parent = useRef();
     useEffect(()=>{
         const total_time = (Tone.Time('1m').toTicks()*tlength);
-        let total_width = null;
-        const calc_total_width = ()=>{
-            total_width = bar_parent.current.offsetWidth;
-        }
-        calc_total_width();
-        window.addEventListener('resize', calc_total_width);
+        
 
         let STOP = false;
         let last_pos = 0;
         const animQ = 0.06;
-        const Qstep = total_width*animQ;
+
+        let total_width = null;
+        let Qstep = null;
+
+        const calc_total_width = ()=>{
+            total_width = bar_parent.current.offsetWidth;
+            Qstep = total_width*animQ;
+        }
+        calc_total_width();
+        window.addEventListener('resize', calc_total_width);
+
         const loop = ()=>{
             if(!bar.current || !bar_parent.current) return;
             
@@ -69,7 +73,7 @@ export default function Visualisation({
 
     let subsectioncounter = 1;
     return <div style={{position:'relative'}}>
-        <div className={styles.add_btn} onClick={addNewSection}>
+        <div className={styles.add_btn} onClick={()=>addNewSection()}>
             <AiOutlinePlus style={{verticalAlign:'middle'}}/>
         </div>
         <div ref={bar_parent} className={styles.bar_parent}>

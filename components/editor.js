@@ -3,13 +3,19 @@ import RatioPicker from './ratiopicker'
 
 import clone from 'just-clone'
 
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useTheme } from '../hooks/useTheme';
 
-export default function Editor({
-        sections: [sections, setSections], 
-        curSection: [curSection, setCurSection],
-    }){
+import useStore from '../hooks/useStore';
+import shallow from 'zustand/shallow';
+
+export default function Editor(){
+
+    const [sections, setSections, curSection, setCurSection] = 
+        useStore(useCallback(state => 
+            [state.sections, state.setSections, state.curSection, state.setCurSection], 
+            []), shallow);
+
     const styles = useTheme(require('../styles/editor.module.sass'));
 
     const S = useMemo(()=>sections[curSection], [sections, curSection]);

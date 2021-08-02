@@ -2,22 +2,27 @@ import { useTheme } from "../hooks/useTheme"
 import { getSynthNames } from "../lib/instruments";
 
 import clone from 'just-clone'
+import useStore from "../hooks/useStore";
+import { useCallback } from "react";
+import shallow from "zustand/shallow";
 
 export default function instruments({
         style,
-        instruments: [instruments, setInstruments]
     }){
+    const [instrumentIDs, setInstrumentIDs] = useStore(useCallback(
+        state => [state.instrumentIDs, state.setInstrumentIDs], []), shallow);
+
     const styles = useTheme(require('../styles/instruments.module.sass'));
     const synth_names = getSynthNames();
 
     const handler = (id)=>({target})=>{
         const val = Number(target.value);
-        instruments[id] = val;
-        setInstruments(clone(instruments));
+        instrumentIDs[id] = val;
+        setInstrumentIDs(clone(instrumentIDs));
     }
 
     return <div className={styles.container} style={style}>
-        {instruments.map((inst, i)=>
+        {instrumentIDs.map((inst, i)=>
         <div key={i} className={styles.instrument}>
             <div className={styles.header}>track {i+1} uses</div>
             <div className={styles.body}>

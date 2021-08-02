@@ -6,9 +6,10 @@ import { copyTextToClipboard } from '../lib/clipboard'
 import { useDarkMode } from 'next-dark-mode'
 import { useTheme } from '../hooks/useTheme'
 
-export default function Social({
-        sections, bpm
-    }){
+import useStore from '../hooks/useStore'
+import { useCallback } from 'react'
+
+export default function Social(){
     
     const styles = useTheme(require('../styles/topbar.module.sass'));
 
@@ -46,14 +47,15 @@ export default function Social({
             >
             <BiShare 
                 style={{verticalAlign:'middle'}}
-                onClick={()=>{
+                onClick={useCallback(()=>{
+                    let state = useStore.getState();
                     let val = 
                         window.location.origin + window.location.pathname
-                        + sectionsToQuery(sections, bpm);
+                        + sectionsToQuery(state.sections, state.bpm);
                     console.log(val);
                     copyTextToClipboard(val);
-                    alert('copied the url to clipboard!');
-                }}/> 
+                    setTimeout(()=>alert('copied the url to clipboard!'), 100);
+                }, [])}/> 
             <div className={styles.tooltip}>share your rhythm</div>
         </div>
         <div className={styles.button}>            

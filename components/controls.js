@@ -3,12 +3,16 @@ import Field from './field';
 import {RiPauseLine, RiPlayLine, RiStopLine, RiSoundModuleLine} from 'react-icons/ri'
 import { useTheme } from '../hooks/useTheme';
 
+import useStore from '../hooks/useStore';
+import { useCallback } from 'react';
+import shallow from 'zustand/shallow';
+
 export default function Controls({
-        paused: [paused, setPaused],
-        bpm: [bpm, setBpm],
-        editMode: [editMode, setEditMode],
         style,
     }){
+
+    const [ paused, pause, play, bpm, setBpm, editMode, setEditMode ] = useStore(useCallback(state => 
+        [state.paused, state.pause, state.play, state.bpm, state.setBpm, state.editMode, state.setEditMode], []), shallow);
 
     const styles = useTheme(require('../styles/controls.module.sass'));
 
@@ -19,7 +23,7 @@ export default function Controls({
         <div className={styles.transport_bar}>
             <div 
                 className={styles.transport_button}
-                onClick={()=>setPaused(!paused)}
+                onClick={useCallback(()=>(paused ? play : pause)(), [paused])}
                 >
                 {paused ? 
                 <RiPlayLine style={{verticalAlign:'middle'}}/> :
@@ -28,10 +32,10 @@ export default function Controls({
             </div>
             <div 
                 className={styles.transport_button}
-                onClick={()=>{
+                onClick={useCallback(()=>{
                     require('tone').Transport.stop();
-                    setPaused(true);
-                }}
+                    pause();
+                }, [])}
                 >
                 <RiStopLine style={{verticalAlign:'middle'}}/>
             </div>
@@ -48,7 +52,9 @@ export default function Controls({
             </div>
             <div 
                 className={styles.settings_button +(editMode=='instrument' ? ' '+styles.edit_mode : '')}
-                onClick={()=>setEditMode(editMode == 'section' ? 'instrument' : 'section')}>
+                onClick={useCallback(()=>
+                    setEditMode(editMode == 'section' ? 'instrument' : 'section'), 
+                [editMode])}>
                 <RiSoundModuleLine style={{verticalAlign:'middle'}}/>
             </div>
     
