@@ -30,15 +30,6 @@ export default function Home() {
 
   const styles = useTheme(require("../styles/Home.module.sass"));
 
-  // debug
-  useEffect(()=>{
-    let cnt = 0;
-    return useStore.subscribe((cur, prev)=>{
-      cnt++;
-      console.log("state update", cnt);
-    })
-  }, []);
-
   const [paused, bpm, setBpm, sections, setSections, instrumentIDs] = useStore(
     useCallback(
       (state) => [
@@ -90,18 +81,7 @@ export default function Home() {
 
   // sections to actual sound
   useEffect(() => {
-    const { withScale } = require("../lib/helpers");
     const scheduleSections = require("../lib/scheduleSections").default;
-
-    const measure_count = sections.reduce(
-      (s, c) => s + c.length * (c.repeat + 1),
-      0
-    );
-
-    Tone.Transport.loop = true;
-    Tone.Transport.loopStart = 0;
-    Tone.Transport.loopEnd = withScale(measure_count)("1m");
-    Tone.Transport.timeSignature = [4, 4];
 
     scheduleSections((time, { accent, duration, track }) => {
       const F = getInstruments()[track];
