@@ -17,6 +17,7 @@ export default function Social(){
     const toggleDarkMode = ()=>darkModeActive ? switchToLightMode() : switchToDarkMode();
 
     return <> 
+    <div className={styles.displacer}></div>
     <div className={styles.left}>
         <div className={styles.button}>
             <a

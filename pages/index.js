@@ -11,9 +11,7 @@ import { sectionsToImgURL } from "../lib/sectionsToImgURL";
 import favicon from "../lib/favicon";
 import {
   init as initSynths,
-  updateInstruments,
   getInstruments,
-  getNewInstrument,
 } from "../lib/instruments";
 
 const Tone = require("tone");
@@ -22,7 +20,6 @@ import Main from "../components/main";
 
 export default function Home() {
   // TODO:
-  // fix mobile performance issues
   // midi export
   // dragging
   // instruments

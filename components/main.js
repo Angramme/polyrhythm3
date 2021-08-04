@@ -15,6 +15,7 @@ export default function Main(){
     const editMode = useStore(useCallback(state => state.editMode, []));
     
     return <div className={styles.container}>
+        <TopBar/>
         <Visualisation/>
         <Controls/>
         {editMode == 'section' ? 
@@ -23,6 +24,5 @@ export default function Main(){
         {editMode == 'instrument' ? 
         <Instruments/>
             : ''}
-        <TopBar/>
     </div>
 }
