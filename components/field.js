@@ -45,7 +45,8 @@ export default function Field({className, type, style, onInput, ...args}){
                 +(wrong ? ' '+styles.wrong : '')}
             onInput={(...X)=>{
                 const x = X[0].target;
-                let val = x.value;
+                let sval = x.value;
+                let val = sval;
                 
                 if(type == 'number'){
                     const exp = eval_math_expr(x.value);
@@ -58,7 +59,7 @@ export default function Field({className, type, style, onInput, ...args}){
 
                 if(wrong) setWrong(false);
 
-                onInput(val);
+                onInput(val, sval);
             }}
             ></input>
     </div>

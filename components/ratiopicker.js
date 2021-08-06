@@ -32,9 +32,9 @@ export default function RatioPicker(
                     defaultValue={num}
                     type="number"
                     step={step} min={min} max={max}
-                    onInput={value=>{
+                    onInput={(value, str_val)=>{
                         if(value.length <= 0) return;
-                        if(value == '0' && i == ratios.length-1) ratios.splice(i, 1);
+                        if(str_val == '0' && i == ratios.length-1) ratios.splice(i, 1);
                         else ratios[i] = Number(value);
                         setRatios([...ratios]);
                     }}
