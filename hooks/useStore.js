@@ -18,6 +18,12 @@ const useStore = create(set => ({
 
     addSection: (sec = make_default_section()) => 
         set(state => ({ sections: [...state.sections, sec] })),
+    swapSections: (ai, bi) => set(state => {
+            let temp = state.sections[ai];
+            state.sections[ai] = state.sections[bi];
+            state.sections[bi] = temp;
+            return { sections: [...state.sections] };
+        }),
     setSections: (secs) => set({ sections: secs }),
     
     setInstrumentIDs: (x) => set({ instrumentIDs: x }),

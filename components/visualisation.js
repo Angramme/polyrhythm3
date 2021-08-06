@@ -1,7 +1,7 @@
 import {AiOutlinePlus, AiOutlineColumnWidth} from 'react-icons/ai'
 import {TiArrowRepeat} from 'react-icons/ti'
 
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import useStore from '../hooks/useStore';
 import shallow from 'zustand/shallow'
@@ -10,8 +10,8 @@ const Tone = require('tone');
 
 
 export default function Visualisation(){
-    const [sections, addNewSection, curSection, setCurSection, bpm, editMode] = useStore(
-        useCallback(state => [state.sections, state.addSection, state.curSection, state.setCurSection, state.bpm, state.editMode], []), shallow);
+    const [sections, swapSections, addNewSection, curSection, setCurSection, bpm, editMode] = useStore(
+        useCallback(state => [state.sections, state.swapSections, state.addSection, state.curSection, state.setCurSection, state.bpm, state.editMode], []), shallow);
 
     const styles = useTheme(require('../styles/visualisation.module.sass'));
 
@@ -21,8 +21,7 @@ export default function Visualisation(){
     const tlength = useMemo(()=>sections.reduce((s, c)=>s+c.length*(1+c.repeat), 0), 
         [sections]);
 
-    // const addNewSection = ()=>setSections([...sections, {...getDefaultSection()}]);
-
+    /// BAR ANIMATION
     const bar = useRef();
     const bar_parent = useRef();
     useEffect(()=>{
@@ -71,6 +70,79 @@ export default function Visualisation(){
         };
     }, [bar_parent.current, tlength]);
 
+
+    /// SECTION DRAGGING
+    let dragged = useRef(null);
+    let initialX = useRef(null);
+
+    const ondragover = useCallback((E)=>{
+        E.preventDefault();
+        E.dataTransfer.dropEffect = 'move';
+    }, []);
+    const ondragenter = useCallback((E)=>{
+        E.preventDefault();
+        const par = E.target.closest('.'+styles.section);
+        if(!par.dragover_count) par.dragover_count = 0;
+        par.dragover_count++;
+        par.classList.add(styles.dragover);
+    }, []);
+    const ondragleave = useCallback((E)=>{
+        E.preventDefault();
+        const par = E.target.closest('.'+styles.section);
+        par.dragover_count--;
+        if(par.dragover_count == 0)
+            par.classList.remove(styles.dragover);
+    }, []);
+    const ondragstart = useCallback((index)=>(E)=>{
+        setCurSection(index);
+
+        E.dataTransfer.effectAllowed = 'move';
+        E.dataTransfer.setData('number', index);
+        
+        let dragImage = document.createElement("div");
+        dragImage.style.visibility = "hidden";
+        E.dataTransfer.setDragImage(dragImage, 0, 0);
+
+        const BB = E.target.getBoundingClientRect();
+        initialX.current = (BB.left+BB.right)/2;
+
+        E.target.style.transition = 'transform .2s';
+        E.target.style.transform = 
+            `translate(${E.clientX-initialX.current}px, ${- E.target.offsetHeight*.5 |0}px)
+        scale(.5)`;
+        setTimeout(()=>{
+            E.target.style.transition = null,
+            dragged.current = E.target;
+        }, 150);
+    }, []);
+    const ondragend = useCallback((E)=>{
+        dragged.current = null;    
+        E.target.style.transition = null;
+        E.target.style.transform = null;
+        E.target.style.zIndex = null;
+    }, []);
+    const ondrag = useCallback((E)=>{
+        if(!dragged.current) return;
+        const style = dragged.current.style; 
+        style.transform = 
+            `translate(${E.clientX-initialX.current}px, ${-dragged.current.offsetHeight*.5 |0}px)
+            scale(.5)`;
+        style.zIndex = 11;
+
+    }, [dragged, initialX]);
+    const ondrop = useCallback((index)=>(E)=>{
+        dragged.current.style.transition = null;
+        dragged.current.style.transform = null;
+        dragged.current.style.zIndex = null;
+        dragged.current = null;    
+        const par = E.target.closest('.'+styles.section);
+        par.dragover_count = 0;
+        par.classList.remove(styles.dragover);
+
+        setCurSection(index);
+        swapSections(index, Number(E.dataTransfer.getData('number')));
+    }, []);
+
     let subsectioncounter = 1;
     return <div style={{position:'relative'}}>
         <div className={styles.add_btn} onClick={()=>addNewSection()}>
@@ -89,8 +161,17 @@ export default function Visualisation(){
                         ' '+styles.current: '')}
                 style={{
                     flexBasis: `${100*S.length*(S.repeat+1)/tlength}%`,
+                    cursor: curSection == section_i ? 'grab' : 'pointer',
                 }}
                 onClick={()=>setCurSection(section_i)}
+                onDragStart={ondragstart(section_i)}
+                onDragEnd={ondragend}
+                onDragOver={ondragover}
+                onDrag={ondrag}
+                onDragEnter={ondragenter}
+                onDragLeave={ondragleave}
+                onDrop={ondrop(section_i)}
+                draggable={true}
                 >
                 {Array.from({length: S.repeat+1}, (_, repeat_i)=>
                 <div

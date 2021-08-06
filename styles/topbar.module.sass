@@ -2,7 +2,7 @@
 
 .displacer
     width: 100px
-    height: 3.5em
+    height: 3.5rem
 
 .left, .right
     position: fixed
@@ -17,6 +17,7 @@
         color: $D-primary
     font-size: 1.2rem
 
+    z-index: 11
     display: flex
     flex-flow: row nowrap
 
@@ -55,4 +56,95 @@
     .button *:not(.tooltip):hover + &
         opacity: 100%
         top: 3em
+
+.sellout
+    position: fixed
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+
+    z-index: 100
+    backdrop-filter: blur(5px)
+
+.sellout_box
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    left: 0
+    right: 0
+
+    box-shadow: 0px 0px 20px 15px rgba(0, 0, 0, .1)
+    background: $L-secondary
+    margin: auto
+    width: 70vh
+    padding: $pad
+    border-radius: $border-radius
+
+.coffee_btns
+    display: flex
+    flex-flow: row nowrap
+    justify-content: space-between
+
+    margin-top: 2rem
+
+.imbroke
+    // display: inline-flex
+    line-height: 2
+    padding: 0.7rem 1rem 0.7rem 1rem
+
+    background-color: #3d2e2e
+    color: white
+    text-decoration: none
+    letter-spacing: 0.6px
+    font-family: cursive
+
+    border-radius: 5px
+    border: 1px solid transparent
+
+    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5)
+    transition: 0.3s all linear
+
+    cursor: pointer
+    &:hover, &:active, &:focus 
+        text-decoration: none
+        box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5)
+        opacity: 0.85
+
+.coffee_img
+    height: 2rem
+    margin-bottom: 1px
+    box-shadow: none
+    border: none
+    vertical-align: middle
+
+.coffee_text
+    margin-left: 15px
+    font-size: 1rem
+    vertical-align: middle
+
+.coffee_button
+    // display: inline-flex
+    display: block
+    line-height: 2
+    padding: 0.7rem 1rem 0.7rem 1rem
+    
+    color: #FFFFFF
+    background-color: #FF813F
+    text-decoration: none
+    letter-spacing: 0.6px
+    font-family: cursive
+    
+    border-radius: 5px
+    border: 1px solid transparent
+    
+    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5)
+    transition: 0.3s all linear
+    
+    &:hover, &:active, &:focus 
+        text-decoration: none
+        box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5)
+        opacity: 0.85
+        color:#FFFFFF
+    
         

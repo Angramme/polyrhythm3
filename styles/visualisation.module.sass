@@ -33,6 +33,9 @@ $height: 25vh
     flex-flow: row nowrap
     justify-content: space-between
 
+    &.dragover
+        border: solid 3.5px $L-selected
+
     &.current
         border: solid 3.5px $L-selected
         &.dark
@@ -54,6 +57,9 @@ $height: 25vh
     justify-content: space-between
 
     // &:nth-child(even)
+    background: $L-secondary
+    &.dark
+        background: $D-secondary
     &.even
         background: $L-mid-secondary
         & .repeat_line
@@ -124,7 +130,7 @@ $height: 25vh
         width: .4rem
         height: 100%
     
-        border-radius: .1rem
+        border-radius: .15rem
 
     height: 1rem
     &.sub_dot
