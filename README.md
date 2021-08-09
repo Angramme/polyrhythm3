@@ -9,7 +9,7 @@
 ![visual block](readme/visual.png)
 
 The UI is divided into blocks, the first block is the visualization block, here you can see your "sections" displayed in a midi-esque fashion.
-It allows you to do teh following actions:
+It allows you to do the following actions:
 - add new sections with the add button to the right 
 - select the section that you are currently editing in the editor by clicking on it.
 - swap two sections by dragging one section over another.
@@ -18,12 +18,12 @@ It allows you to do teh following actions:
 ![control block](readme/control.png)
 
 Next block under the visualization block is the transport control block. It allows you to change the bpm as well as to pause, play and stop.
-You can also see a button that opens [additional settings](###-instrument-block), we will get to it later.
+You can also see a button that opens [additional settings](#instrument-block), we will get to it later.
 
 ### Editor block
 ![editor block](readme/editor.png)
 
-The last visible block is the editor block, it allows you to edit the [section's parameters](###-section-properties) like the ratios of the polyrythms etc. The properties are mostly the same as the previous polyrhythm versions however some new features like the offsets and swing were added.
+The last visible block is the editor block, it allows you to edit the [section's parameters](#section-properties) like the ratios of the polyrythms etc. The properties are mostly the same as the previous polyrhythm versions however some new features like the offsets and swing were added.
 
 ### Instrument block
 ![instrument block](readme/instruments.png)
