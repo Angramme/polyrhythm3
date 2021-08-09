@@ -1,4 +1,4 @@
-import { BiCoffeeTogo, BiShare, BiMoon, BiSun } from 'react-icons/bi'
+import { BiCoffeeTogo, BiShare, BiMoon, BiSun, BiHelpCircle } from 'react-icons/bi'
 import { SiAboutDotMe, SiMidi } from 'react-icons/si'
 
 import { sectionsToQuery } from '../lib/serialization'
@@ -97,6 +97,7 @@ export default function Social(){
             <a
                 href="https://ozi.vercel.app"
                 target="_blank"
+                rel="noopener"
                 >
                 <SiAboutDotMe style={{verticalAlign:'middle'}}/> 
             </a>
@@ -106,10 +107,21 @@ export default function Social(){
             <a
                 href="https://www.buymeacoffee.com/angramme"
                 target="_blank"
+                rel="noopener"
                 >
                 <BiCoffeeTogo style={{verticalAlign:'middle'}}/> 
             </a>
             <div className={styles.tooltip}>buy me a coffee</div>
+        </div>
+        <div className={styles.button}>
+            <a
+                href="https://github.com/Angramme/polyrhythm3#tutorial"
+                target="_blank"
+                rel="noopener"
+                >
+                <BiHelpCircle style={{verticalAlign:'middle'}}/> 
+            </a>
+            <div className={styles.tooltip}>Open help page.</div>
         </div>
     </div>
     <div className={styles.right}>
