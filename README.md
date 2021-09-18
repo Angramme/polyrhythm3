@@ -1,3 +1,5 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fangramme.github.io%2Fpolyrhythm3%2Findex.html&count_bg=%23303250&title_bg=%232D2D2D&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Polyrhythm 3
 > This is an alpha of the new release of polyrhythm metronome, it is in the test phase right now but will soon replace the current polyrhythm. 

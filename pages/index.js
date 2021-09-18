@@ -17,6 +17,7 @@ const Tone = require("tone");
 
 import Main from "../components/main";
 import CookieConsent from "react-cookie-consent";
+import HitTracker from "../components/hittracker";
 
 export default function Home() {
   const styles = useTheme(require("../styles/Home.module.sass"));
@@ -112,10 +113,11 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>Polyrhythm Metronome</title>
-        <meta name="description" content="A simple open source Polyrhythmic Generator / Metronome. It is free but you can support me on buymeacoffee.com/angramme" />
+        <meta name="description" content="A simple open source Polyrhythmic Generator / Metronome. Ever wanted to study a 13:7 or 3:4:5 or 42:69 polyrhythm? Then this is the app for you!" />
         <link rel="icon" href={favicon}/>
       </Head>
-      {/* <h2>Polyrhythm Metronome</h2> */}
+
+      <HitTracker/>
 
       <Main></Main>
 
