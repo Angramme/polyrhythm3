@@ -5,7 +5,7 @@ import { useTheme } from '../hooks/useTheme';
 
 import useStore from '../hooks/useStore';
 import { useCallback } from 'react';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 
 export default function Controls({
         style,

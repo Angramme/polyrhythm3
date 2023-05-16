@@ -1,16 +1,9 @@
 const withPWA = require("next-pwa");
-
-const EXPORT_TO_GH_PAGES = false;
-const GH_PAGES_REPO_NAME = "polyrhythm3";
-const basePath =
-  process.env.NODE_ENV === "production" && EXPORT_TO_GH_PAGES
-    ? `/${GH_PAGES_REPO_NAME}`
-    : "";
+const basePath = "";
 
 module.exports = withPWA({
-  pwa: {
-    dest: "public",
-  },
+  dest: "public",
+})({
   basePath,
   assetPrefix: `${basePath}/`,
   webpack: (cfg) => {

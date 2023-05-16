@@ -6,8 +6,8 @@ const make_default_section = ()=>({
     repeat: 0,
     swing: 0,
     ratios: [1, 4], 
-    subdivide: [1],
-    offsets: [0],
+    subdivide: [1, 1],
+    offsets: [0, 0],
 });
 
 const useStore = create(set => ({

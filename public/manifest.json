@@ -1,0 +1,21 @@
+{
+  "name": "Polyrhythm3",
+  "short_name": "Poly3",
+  "icons": [
+    {
+      "src": "/icons/icon512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+        "src": "/icons/maskable_icon.png",
+        "type": "image/png",
+        "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}
