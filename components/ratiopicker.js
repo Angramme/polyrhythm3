@@ -15,15 +15,12 @@ export default function RatioPicker(
         [defaultValue, delimiter]);
 
     const [ratios, setRatios] = useState(default_ratios);
-    const [igNxUp, setIgNxUp] = useState(null); // ignore next update
 
     useEffect(()=>{
-        if(igNxUp && igNxUp == ratios) return setIgNxUp(null);
         if(onInput) onInput(ratios);
     }, [ratios]);
 
     useEffect(()=>{
-        setIgNxUp(default_ratios)
         setRatios(default_ratios);
     }, [default_ratios]);
 
@@ -37,12 +34,9 @@ export default function RatioPicker(
                     step={step} min={min} max={max}
                     onInput={(value, str_val)=>{
                         if(value.length <= 0) return;
-                        else ratios[i] = value;
+                        if(str_val == '0' && i == ratios.length-1) ratios.splice(i, 1);
+                        else ratios[i] = Number(value);
                         setRatios([...ratios]);
-                    }}
-                    onAbandon={()=>{
-                        ratios.splice(i, 1);
-                        setRatios([...ratios]);                  
                     }}
                     />
                 {i < ratios.length-1 ? 

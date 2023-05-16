@@ -1,9 +1,10 @@
+import Head from "next/head";
 // import Image from 'next/image'
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import { useTheme } from "../hooks/useTheme";
 import useStore from "../hooks/useStore";
-import { shallow } from "zustand/shallow";
+import shallow from "zustand/shallow";
 
 import { queryToSections } from "../lib/serialization";
 import { sectionsToImgURL } from "../lib/sectionsToImgURL";
@@ -17,7 +18,6 @@ const Tone = require("tone");
 import Main from "../components/main";
 import CookieConsent from "react-cookie-consent";
 import HitTracker from "../components/hittracker";
-import Head from "next/head";
 
 export default function Home() {
   const styles = useTheme(require("../styles/Home.module.sass"));
@@ -112,8 +112,11 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
+        <title>Polyrhythm Metronome</title>
+        <meta name="description" content="A simple open source Polyrhythmic Generator / Metronome. Ever wanted to study a 13:7 or 3:4:5 or 42:69 polyrhythm? Then this is the app for you!" />
         <link rel="icon" href={favicon}/>
       </Head>
+
       <HitTracker/>
 
       <Main></Main>
