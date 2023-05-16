@@ -1,5 +1,5 @@
 import { BiCoffeeTogo, BiShare, BiMoon, BiSun, BiHelpCircle } from 'react-icons/bi'
-import { SiAboutdotme, SiMidi } from 'react-icons/si'
+import { SiAboutDotMe, SiMidi } from 'react-icons/si'
 
 import { sectionsToQuery } from '../lib/serialization'
 import { copyTextToClipboard } from '../lib/clipboard'
@@ -13,7 +13,6 @@ import Cookies from 'js-cookie'
 
 import download from 'downloadjs'
 import sectionsToMIDI from '../lib/sectionsToMIDI'
-import { WEBSITE_URL } from '../lib/consts'
 
 export default function Social(){
     
@@ -96,11 +95,11 @@ export default function Social(){
     <div className={styles.left}>
         <div className={styles.button}>
             <a
-                href={WEBSITE_URL}
+                href="https://ozi.vercel.app"
                 target="_blank"
                 rel="noopener"
                 >
-                <SiAboutdotme style={{verticalAlign:'middle'}}/> 
+                <SiAboutDotMe style={{verticalAlign:'middle'}}/> 
             </a>
             <div className={styles.tooltip}>my website</div>
         </div>
