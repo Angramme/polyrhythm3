@@ -16,9 +16,9 @@ function eval_math_expr (exp) {
     if (!valid) return null;
     try { res = eval(exp); } catch (e) { return null; };
     return res;
-}
+};
 
-export default function Field({className, type, style, onInput, ...args}){
+export default (function Field({className, type, style, onInput, onAbandon, ...args}){
     const styles = useTheme(require('../styles/field.module.sass'));
 
     let ref = useRef();
@@ -28,6 +28,7 @@ export default function Field({className, type, style, onInput, ...args}){
     useEffect(()=>{
         if(args.defaultValue == null || args.defaultValue == undefined) return;
         ref.current.value = args.defaultValue;
+        setWrong(false);
     }, [args.defaultValue]);
 
     return <div className={className} style={style}>
@@ -37,7 +38,7 @@ export default function Field({className, type, style, onInput, ...args}){
         }
         <input 
             ref={ref} 
-            {...args}
+            // {...args}
             type={type == 'number' ? 'text' : type}
             className={
                 styles.field 
@@ -47,7 +48,7 @@ export default function Field({className, type, style, onInput, ...args}){
                 const x = X[0].target;
                 let sval = x.value;
                 let val = sval;
-                
+
                 if(type == 'number'){
                     const exp = eval_math_expr(x.value);
                     if(exp == null || exp == undefined) return setWrong(true);
@@ -61,6 +62,10 @@ export default function Field({className, type, style, onInput, ...args}){
 
                 onInput(val, sval);
             }}
+            onBlur={(...X)=>{
+                const x = X[0].target
+                if(onAbandon && x.value == "") onAbandon();
+            }}
             ></input>
     </div>
-}
+});

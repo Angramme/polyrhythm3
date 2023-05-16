@@ -7,7 +7,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useTheme } from '../hooks/useTheme';
 
 import useStore from '../hooks/useStore';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 
 export default function Editor(){
 
@@ -20,6 +20,15 @@ export default function Editor(){
 
     const S = useMemo(()=>sections[curSection], [sections, curSection]);
 
+    const normalize = (new_len)=>{
+        const xs = [S.ratios, S.subdivide, S.offsets];
+        const def = [1, 1, 0];
+        if(new_len) for(let i=0; i<3; i++){
+            let x = xs[i];
+            if(x.length > new_len) x.length = new_len;
+            else if(x.length < new_len) for(let j=0; j<new_len - x.length; j++) x.push(def[i]);
+        } 
+    };
     const up = (cb)=>(vals)=>{
         if(vals == null || vals == undefined) return;
         cb(vals);
@@ -37,8 +46,12 @@ export default function Editor(){
                             className={styles.picker}
                             name="ratios" 
                             defaultValue={S.ratios.join(':')}
-                            min={0} step={1}
-                            onInput={up(vals=>S.ratios=vals)}/>
+                            min={1} step={1}
+                            onInput={up(vals=>{
+                                S.ratios=vals;
+                                normalize(vals.length);   
+                            })}
+                            />
                     </td>
                 </tr>
                 <tr>
@@ -48,7 +61,11 @@ export default function Editor(){
                         name="subdivide" 
                         defaultValue={S.subdivide.join(':')}
                         step={1} min={1}
-                        onInput={up(vals=>S.subdivide=vals)}/>
+                        onInput={up(vals=>{
+                            S.subdivide=vals;
+                            normalize(vals.length);
+                        })}
+                        />
                     </td>
                 </tr>
                 <tr>
@@ -58,7 +75,11 @@ export default function Editor(){
                         name="offsets" 
                         defaultValue={S.offsets.join(':')}
                         max={1} min={0}
-                        onInput={up(vals=>S.offsets=vals)}/>
+                        onInput={up(vals=>{
+                            S.offsets=vals;
+                            normalize(vals.length);
+                        })}
+                        />
                     </td>
                 </tr>
                 </tbody>
@@ -94,6 +115,7 @@ export default function Editor(){
                     <td>
                     <Field type="button" value="remove" {...(sections.length <= 1 ? {disabled:true} : {})}
                         onClick={up(()=>{
+                            console.log("hello");
                             if(sections.length > 1){
                                 setCurSection(Math.max(0, curSection-1));
                                 return sections.splice(sections.indexOf(S), 1);
