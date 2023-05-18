@@ -111,9 +111,9 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <Head>
+      {/* <Head>
         <link rel="icon" href={favicon}/>
-      </Head>
+      </Head> */}
       <HitTracker/>
 
       <Main></Main>
