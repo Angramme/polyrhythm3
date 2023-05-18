@@ -1,8 +1,10 @@
 const withPWA = require("next-pwa");
+const runtimeCaching = require("next-pwa/cache");
 const basePath = "";
 
 module.exports = withPWA({
   dest: "public",
+  runtimeCaching,
 })({
   basePath,
   assetPrefix: `${basePath}/`,
