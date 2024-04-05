@@ -1,4 +1,4 @@
-const withPWA = require("next-pwa");
+// const withPWA = require("next-pwa");
 
 const EXPORT_TO_GH_PAGES = false;
 const GH_PAGES_REPO_NAME = "polyrhythm3";
@@ -7,10 +7,7 @@ const basePath =
     ? `/${GH_PAGES_REPO_NAME}`
     : "";
 
-module.exports = withPWA({
-  pwa: {
-    dest: "public",
-  },
+module.exports = {
   basePath,
   assetPrefix: `${basePath}/`,
   webpack: (cfg) => {
@@ -23,4 +20,21 @@ module.exports = withPWA({
     };
     return cfg;
   },
-});
+};
+// module.exports = withPWA({
+//   pwa: {
+//     dest: "public",
+//   },
+//   basePath,
+//   assetPrefix: `${basePath}/`,
+//   webpack: (cfg) => {
+//     const originalEntry = cfg.entry;
+//     cfg.entry = async () => {
+//       const entries = await originalEntry();
+//       if (entries["main.js"])
+//         entries["main.js"].unshift("./client/polyfills.js");
+//       return entries;
+//     };
+//     return cfg;
+//   },
+// });
