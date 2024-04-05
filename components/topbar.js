@@ -13,7 +13,6 @@ import Cookies from 'js-cookie'
 
 import download from 'downloadjs'
 import sectionsToMIDI from '../lib/sectionsToMIDI'
-import { WEBSITE_URL } from '../lib/consts'
 
 export default function Social(){
     
@@ -96,7 +95,7 @@ export default function Social(){
     <div className={styles.left}>
         <div className={styles.button}>
             <a
-                href={WEBSITE_URL}
+                href="https://ozi.vercel.app"
                 target="_blank"
                 rel="noopener"
                 >
