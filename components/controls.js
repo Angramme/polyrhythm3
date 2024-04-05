@@ -1,4 +1,4 @@
-import Field from './field';
+import {Field} from './field';
 
 import {RiPauseLine, RiPlayLine, RiStopLine, RiSoundModuleLine} from 'react-icons/ri'
 import { useTheme } from '../hooks/useTheme';

@@ -1,5 +1,5 @@
 import { BiCoffeeTogo, BiShare, BiMoon, BiSun, BiHelpCircle } from 'react-icons/bi'
-import { SiAboutDotMe, SiMidi } from 'react-icons/si'
+import { SiAboutdotme, SiMidi } from 'react-icons/si'
 
 import { sectionsToQuery } from '../lib/serialization'
 import { copyTextToClipboard } from '../lib/clipboard'
@@ -99,7 +99,7 @@ export default function Social(){
                 target="_blank"
                 rel="noopener"
                 >
-                <SiAboutDotMe style={{verticalAlign:'middle'}}/> 
+                <SiAboutdotme style={{verticalAlign:'middle'}}/> 
             </a>
             <div className={styles.tooltip}>my website</div>
         </div>
