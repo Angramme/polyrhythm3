@@ -54,9 +54,6 @@ export default function Home() {
         setBpm(bpm + 10);
       }else if (e.key === "ArrowDown") {
         setBpm(bpm - 10);
-      }else if (e.key === "Backspace") {
-        require('tone').Transport.stop();
-        pause();
       }
     };
     window.addEventListener('keydown', handler);
