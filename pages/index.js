@@ -22,7 +22,7 @@ import HitTracker from "../components/hittracker";
 export default function Home() {
   const styles = useTheme(require("../styles/Home.module.sass"));
 
-  const [paused, bpm, setBpm, sections, setSections, instrumentIDs] = useStore(
+  const [paused, bpm, setBpm, sections, setSections, instrumentIDs, pause, play] = useStore(
     useCallback(
       (state) => [
         state.paused,
@@ -31,6 +31,8 @@ export default function Home() {
         state.sections,
         state.setSections,
         state.instrumentIDs,
+        state.pause,
+        state.play,
       ],
       []
     ),
@@ -42,6 +44,24 @@ export default function Home() {
     if (paused) Tone.Transport.pause();
     else Tone.Transport.start();
   }, [paused]);
+
+  useEffect(()=>{
+    const handler = (e) => {
+      if (e.key === " ") {
+        if (paused) play();
+        else pause();
+      }else if (e.key === "ArrowUp") {
+        setBpm(bpm + 10);
+      }else if (e.key === "ArrowDown") {
+        setBpm(bpm - 10);
+      }else if (e.key === "Backspace") {
+        require('tone').Transport.stop();
+        pause();
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [paused, bpm]);
 
   // bpm
   useEffect(() => {

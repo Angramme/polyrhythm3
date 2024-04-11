@@ -8,6 +8,7 @@ const basePath =
     : "";
 
 module.exports = {
+  output: 'export',
   basePath,
   assetPrefix: `${basePath}/`,
   webpack: (cfg) => {
