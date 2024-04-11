@@ -18,7 +18,7 @@ function eval_math_expr (exp) {
     return res;
 }
 
-export default function Field({className, type, style, onInput, ...args}){
+export function Field({className, type, style, onInput, ...args}){
     const styles = useTheme(require('../styles/field.module.sass'));
 
     let ref = useRef();

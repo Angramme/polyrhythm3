@@ -1,4 +1,4 @@
-import Field from './field'
+import {Field} from './field'
 import RatioPicker from './ratiopicker'
 
 import clone from 'just-clone'
