@@ -140,14 +140,13 @@ export default function Home() {
 
       <CookieConsent
         location="bottom"
-        buttonText="Hmmm, bingus"
+        buttonText="I understand"
         cookieName="myAwesomeCookieName2"
         style={{ background: "#111111" }}
         buttonStyle={{ color: "#111111", fontSize: "14px" }}
         expires={150}
         >
-        Give me them cookies! I don't VALUE (💰💰💰) your privacy. {" "}
-        <span style={{ fontSize: "12px" }}>Just kidding, btw you can support me on buymeacoffee.com/angramme</span>
+        Hey! This website uses cookies 🍪 to enhance the user experience.{" "}
       </CookieConsent>
     </div>
   );
