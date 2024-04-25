@@ -1,4 +1,6 @@
 import { Html, NextScript, Head, Main } from "next/document";
+import { CloudflareAnalytics } from "../components/metrics/CloudflareAnalytics";
+import { MicrosoftClarity } from "../components/metrics/MicrosoftClarity";
 
 
 export default function Document(){
@@ -8,12 +10,8 @@ export default function Document(){
             <body>
                 <Main/>
                 <NextScript/>
-                <>
-                    <script 
-                        defer 
-                        src='https://static.cloudflareinsights.com/beacon.min.js' 
-                        data-cf-beacon='{"token": "e5220b008f4e45978d81fd6ab189ec0e"}'></script>
-                </>
+                <CloudflareAnalytics/>
+                <MicrosoftClarity/>
             </body>
         </Html>
     )
