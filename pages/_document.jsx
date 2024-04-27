@@ -6,12 +6,13 @@ import { MicrosoftClarity } from "../components/metrics/MicrosoftClarity";
 export default function Document(){
     return (
         <Html lang='en'>
-            <Head/>
+            <Head>
+                <MicrosoftClarity/>
+            </Head>
             <body>
                 <Main/>
                 <NextScript/>
                 <CloudflareAnalytics/>
-                <MicrosoftClarity/>
             </body>
         </Html>
     )
