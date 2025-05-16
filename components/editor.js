@@ -14,7 +14,7 @@ export default function Editor(){
     const [sections, setSections, curSection, setCurSection] = 
         useStore(useCallback(state => 
             [state.sections, state.setSections, state.curSection, state.setCurSection], 
-            []), shallow);
+            []));
 
     const styles = useTheme(require('../styles/editor.module.sass'));
 

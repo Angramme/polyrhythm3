@@ -3,7 +3,11 @@
 - would you recommend this to a friend?
 - how did you hear about this web app?
 - what is missing from this app?
-- are you a musician/compositior/producer/hobbyist
+- are you a 
+    - musician
+    - compositior
+    - producer
+    - hobbyist
 - do you earn money from your music related activities?
 - how advanced are you? <1y, 2-5y, 5-10y, >10y experience
 - what are your music related problems right now? 
@@ -22,3 +26,9 @@
 
 
 idea: pay 2euro per month or watch 1 30s ad video per day 
+idea: price based on usage
+    show most profitable options first
+    think about default options (small and large joghurt cups)
+
+
+reddit, asking ppl to share, build in public, twitter, product hunt, hacker news, micro launch

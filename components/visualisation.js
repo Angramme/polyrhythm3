@@ -4,14 +4,14 @@ import {TiArrowRepeat} from 'react-icons/ti'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import useStore from '../hooks/useStore';
-import shallow from 'zustand/shallow'
 
 const Tone = require('tone');
 
 
 export default function Visualisation(){
+    'use client'
     const [sections, swapSections, addNewSection, curSection, setCurSection, bpm, editMode] = useStore(
-        useCallback(state => [state.sections, state.swapSections, state.addSection, state.curSection, state.setCurSection, state.bpm, state.editMode], []), shallow);
+        useCallback(state => [state.sections, state.swapSections, state.addSection, state.curSection, state.setCurSection, state.bpm, state.editMode], []));
 
     const styles = useTheme(require('../styles/visualisation.module.sass'));
 

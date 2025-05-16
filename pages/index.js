@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import { useTheme } from "../hooks/useTheme";
 import useStore from "../hooks/useStore";
-import shallow from "zustand/shallow";
 
 import { queryToSections } from "../lib/serialization";
 import { sectionsToImgURL } from "../lib/sectionsToImgURL";
@@ -16,11 +15,10 @@ import {
 const Tone = require("tone");
 
 import Main from "../components/main";
-import CookieConsent from "react-cookie-consent";
 import HitTracker from "../components/hittracker";
 
 export default function Home() {
-  const styles = useTheme(require("../styles/Home.module.sass"));
+  const styles = useTheme(require("styles/Home.module.sass"));
 
   const [paused, bpm, setBpm, sections, setSections, instrumentIDs, pause, play] = useStore(
     useCallback(
@@ -35,8 +33,7 @@ export default function Home() {
         state.play,
       ],
       []
-    ),
-    shallow
+    )
   );
 
   // play / pause
@@ -136,18 +133,11 @@ export default function Home() {
 
       <HitTracker/>
 
-      <Main></Main>
+      <footer className={styles.footer}>
+        Copyright &copy; Kacper Ozieblowski {new Date().getFullYear()}. We improve our products and advertising by using Microsoft Clarity to see how you use our website. By using our site, you agree that we and Microsoft can collect and use this data.
+      </footer>
 
-      <CookieConsent
-        location="bottom"
-        buttonText="I understand"
-        cookieName="myAwesomeCookieName2"
-        style={{ background: "#111111" }}
-        buttonStyle={{ color: "#111111", fontSize: "14px" }}
-        expires={150}
-        >
-        Hey! This website uses cookies 🍪 to enhance the user experience.{" "}
-      </CookieConsent>
+      <Main></Main>
     </div>
   );
 }

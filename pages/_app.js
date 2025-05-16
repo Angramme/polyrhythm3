@@ -1,10 +1,11 @@
-import withDarkMode from 'next-dark-mode'
+import { CookieConsent } from "components/cookie";
 import '../styles/globals.sass'
 
 function MyApp({ Component, pageProps }) {
   return <>
     <Component {...pageProps} />
+    <CookieConsent/>
   </>
 }
 
-export default withDarkMode(MyApp);
+export default MyApp;

@@ -1,4 +1,4 @@
-import create from "zustand"
+import { createWithEqualityFn } from "zustand/traditional"
 import { getNewInstrument } from '../lib/instruments'
 
 const make_default_section = ()=>({
@@ -10,7 +10,7 @@ const make_default_section = ()=>({
     offsets: [0],
 });
 
-const useStore = create(set => ({
+const useStore = createWithEqualityFn(set => ({
     sections: [make_default_section()],
     curSection: 0,
     editMode: 'section',

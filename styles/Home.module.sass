@@ -1,10 +1,12 @@
+@import ./vars
+  
 .container
   width: 100%
   min-height: 100vh
   height: 100vh
   padding: 0 0.5rem
 
-  overflow-y: auto
+  overflow-y: hidden
   overflow-x: hidden
   display: flex
   flex-direction: column
@@ -14,3 +16,13 @@
   background: linear-gradient(45deg, #dd9a9a, #728ece)
   &.dark
     background: linear-gradient(45deg, #382c2c, #343b4b)
+
+.footer
+  position: fixed
+  z-index: 0
+  bottom: 0
+  left: 0
+  right: 0
+  margin: 0.5rem
+  color: $L-secondary
+  font-size: 0.7rem

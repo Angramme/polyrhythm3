@@ -11,13 +11,12 @@ import Dropdown from '../components/dropdown'
 import clone from 'just-clone'
 import useStore from "../hooks/useStore";
 import { useCallback, useMemo } from "react";
-import shallow from "zustand/shallow";
 
 export default function instruments({
         style,
     }){
     const [instrumentIDs, setInstrumentIDs, sections] = useStore(useCallback(
-        state => [state.instrumentIDs, state.setInstrumentIDs, state.sections], []), shallow);
+        state => [state.instrumentIDs, state.setInstrumentIDs, state.sections], []));
 
     const styles = useTheme(require('../styles/instruments.module.sass'));
     const synth_names = getSynthNames();

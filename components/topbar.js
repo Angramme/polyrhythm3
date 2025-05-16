@@ -3,13 +3,14 @@ import { SiAboutdotme, SiMidi } from 'react-icons/si'
 
 import { sectionsToQuery } from '../lib/serialization'
 import { copyTextToClipboard } from '../lib/clipboard'
-import { useDarkMode } from 'next-dark-mode'
-import { useTheme } from '../hooks/useTheme'
+// import { useDarkMode } from 'next-dark-mode'
+import { useTheme, useDarkMode } from '../hooks/useTheme'
 
 import useStore from '../hooks/useStore'
 import { useCallback, useState } from 'react'
+import { useSupporter } from 'hooks/useSupporter'
 
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 
 import download from 'downloadjs'
 import sectionsToMIDI from '../lib/sectionsToMIDI'
@@ -18,18 +19,17 @@ export default function Social(){
     
     const styles = useTheme(require('../styles/topbar.module.sass'));
 
-    const { darkModeActive, switchToDarkMode, switchToLightMode } = useDarkMode();
-    const toggleDarkMode = ()=>darkModeActive ? switchToLightMode() : switchToDarkMode();
+    const { darkModeActive, toggleDarkMode } = useDarkMode();
 
     const [popOpen, setPopOpen] = useState(false);
     const [popCallback, setPopCallback] = useState({cb:()=>null});
     const [thanks, setThanks] = useState(false);
+    const { is_supporter, setIsSupporter } = useSupporter();
     let ignored = false;
     let randompop = null;
 
     const openPopup = useCallback((callback)=>{
-        if(Cookies.get('is_supporter_already') == 'yes')
-            return callback();
+        if(is_supporter) return callback();
         if(ignored && Math.random() > randompop){
             randompop += .15;
             return callback();
@@ -45,7 +45,8 @@ export default function Social(){
 
     const coffeeButton = useCallback(()=>{
         setThanks(true);
-        Cookies.set('is_supporter_already', 'yes', {expires: 111});
+        // Cookies.set('is_supporter_already', 'yes', {expires: 111});
+        setIsSupporter(true);
     }, []);
 
     return <> 

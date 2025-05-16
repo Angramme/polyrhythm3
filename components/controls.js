@@ -5,14 +5,13 @@ import { useTheme } from '../hooks/useTheme';
 
 import useStore from '../hooks/useStore';
 import { useCallback } from 'react';
-import shallow from 'zustand/shallow';
 
 export default function Controls({
         style,
     }){
 
     const [ paused, pause, play, bpm, setBpm, editMode, setEditMode ] = useStore(useCallback(state => 
-        [state.paused, state.pause, state.play, state.bpm, state.setBpm, state.editMode, state.setEditMode], []), shallow);
+        [state.paused, state.pause, state.play, state.bpm, state.setBpm, state.editMode, state.setEditMode], []));
 
     const styles = useTheme(require('../styles/controls.module.sass'));
 

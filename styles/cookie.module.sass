@@ -1,0 +1,21 @@
+@import ./vars
+
+
+.container
+    position: fixed
+    bottom: 0
+    left: 0
+    right: 0
+
+    z-index: 10000000
+
+    padding: 1em
+
+    background: $L-primary
+    color: $L-secondary
+    &.dark
+        background: $D-primary
+        color: $D-secondary
+
+    &.accepted
+        display: none

@@ -5,17 +5,19 @@ import TopBar from "./topbar";
 import Instruments from "./instruments";
 
 import { useTheme } from "../hooks/useTheme";
-import useStore from "../hooks/useStore";
+import useRhythm from "../hooks/useStore";
 import { useCallback } from "react";
+import { FeedbackPop } from "./feedback-pop";
 
 
 export default function Main(){
-    const styles = useTheme(require("../styles/main.module.sass"));
+    const styles = useTheme(require("styles/main.module.sass"));
 
-    const editMode = useStore(useCallback(state => state.editMode, []));
+    const editMode = useRhythm(useCallback(state => state.editMode, []));
     
     return <div className={styles.container}>
         <TopBar/>
+        <FeedbackPop/>
         <Visualisation/>
         <Controls/>
         {editMode == 'section' ? 
@@ -24,5 +26,6 @@ export default function Main(){
         {editMode == 'instrument' ? 
         <Instruments/>
             : ''}
+        <div style={{marginTop:'5rem'}}></div>
     </div>
 }
