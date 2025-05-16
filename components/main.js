@@ -7,7 +7,7 @@ import Instruments from "./instruments";
 import { useTheme } from "../hooks/useTheme";
 import useRhythm from "../hooks/useStore";
 import { useCallback } from "react";
-import { FeedbackPop } from "./feedback-pop";
+// import { FeedbackPop } from "./feedback-pop";
 
 
 export default function Main(){
@@ -17,7 +17,7 @@ export default function Main(){
     
     return <div className={styles.container}>
         <TopBar/>
-        <FeedbackPop/>
+        {/* <FeedbackPop/> */}
         <Visualisation/>
         <Controls/>
         {editMode == 'section' ? 

@@ -22,28 +22,48 @@ export default function Visualisation(){
         [sections]);
 
     /// BAR ANIMATION
-    const bar = useRef();
+    const bar_canvas = useRef();
     const bar_parent = useRef();
     useEffect(()=>{
         const total_time = (Tone.Time('1m').toTicks()*tlength);
         
-
         let STOP = false;
         let last_pos = 0;
-        const animQ = 0.06;
+        const animQ = 0.002;
 
         let total_width = null;
         let Qstep = null;
 
+        let ctx = bar_canvas.current.getContext('2d');
+
+        const draw_line = ()=>{
+            if(!bar_canvas.current || !ctx) return;
+            let can = bar_canvas.current;
+            ctx.clearRect(0, 0, can.width, can.height);
+            ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+            ctx.fillRect(last_pos-0.5, 0, 3, can.height);
+            ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+            ctx.fillRect(last_pos+0.5, 0, 3, can.height);
+        }
+        const resize_canvas = ()=>{
+            if(!bar_canvas.current || !bar_parent.current) return;
+
+            const can = bar_canvas.current;
+            can.width = bar_canvas.current.offsetWidth;
+            can.height = bar_canvas.current.offsetHeight;
+            draw_line();
+        };
         const calc_total_width = ()=>{
             total_width = bar_parent.current.offsetWidth;
             Qstep = total_width*animQ;
-        }
+        };
         calc_total_width();
+        resize_canvas();
         window.addEventListener('resize', calc_total_width);
+        window.addEventListener('resize', resize_canvas);
 
         const loop = ()=>{
-            if(!bar.current || !bar_parent.current) return;
+            if(!bar_canvas.current || !bar_parent.current) return;
             
             let new_pos = Math.min(total_width, 
                 total_width
@@ -52,13 +72,8 @@ export default function Visualisation(){
             new_pos = Math.round(new_pos/Qstep)*Qstep;
 
             if(new_pos != last_pos){
-                bar.current.style.transform = `translateX(${
-                    new_pos
-                }px)`;
-                bar.current.style.transition = new_pos != 0 ? 
-                    `transform ${60*animQ*tlength*4/bpm}s linear` :
-                    null;
                 last_pos = new_pos;
+                draw_line();
             }
             if(!STOP) requestAnimationFrame(loop);
         };
@@ -67,8 +82,9 @@ export default function Visualisation(){
         return function cleanup(){ 
             STOP = true;
             window.removeEventListener('resize', calc_total_width); 
+            window.removeEventListener('resize', resize_canvas); 
         };
-    }, [bar_parent.current, tlength]);
+    }, [bar_canvas.current, bar_parent.current, tlength]);
 
 
     /// SECTION DRAGGING
@@ -149,7 +165,7 @@ export default function Visualisation(){
             <AiOutlinePlus style={{verticalAlign:'middle'}}/>
         </div>
         <div ref={bar_parent} className={styles.bar_parent}>
-            <div ref={bar} className={styles.bar}></div>
+            <canvas ref={bar_canvas} className={styles.bar_canvas}></canvas>
         </div>
         <div className={styles.container}>
             {sections.map((S, section_i)=>
