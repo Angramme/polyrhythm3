@@ -1,7 +1,7 @@
 import { BiCoffeeTogo, BiShare, BiMoon, BiSun, BiHelpCircle } from 'react-icons/bi'
 import { SiAboutdotme, SiMidi } from 'react-icons/si'
 
-import { sectionsToQuery } from '../lib/serialization'
+import { stateToQuery } from '../lib/serialization'
 import { copyTextToClipboard } from '../lib/clipboard'
 import { useDarkMode } from 'next-dark-mode'
 import { useTheme } from '../hooks/useTheme'
@@ -135,7 +135,7 @@ export default function Social(){
                         let state = useStore.getState();
                         let val = 
                             window.location.origin + window.location.pathname
-                            + sectionsToQuery(state.sections, state.bpm);
+                            + stateToQuery(state.sections, state.bpm, state.instrumentIDs);
                         copyTextToClipboard(val);
                         setTimeout(()=>alert('copied the url to clipboard! '), 100);
                     })

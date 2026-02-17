@@ -6,11 +6,12 @@ import { useTheme } from "../hooks/useTheme";
 import useStore from "../hooks/useStore";
 import shallow from "zustand/shallow";
 
-import { queryToSections } from "../lib/serialization";
+import { queryToState } from "../lib/serialization";
 import { sectionsToImgURL } from "../lib/sectionsToImgURL";
 import {
   init as initSynths,
   getInstruments,
+  getNewInstrument,
 } from "../lib/instruments";
 
 const Tone = require("tone");
@@ -22,7 +23,7 @@ import HitTracker from "../components/hittracker";
 export default function Home() {
   const styles = useTheme(require("../styles/Home.module.sass"));
 
-  const [paused, bpm, setBpm, sections, setSections, instrumentIDs, pause, play] = useStore(
+  const [paused, bpm, setBpm, sections, setSections, setInstrumentIDs, instrumentIDs, pause, play] = useStore(
     useCallback(
       (state) => [
         state.paused,
@@ -30,6 +31,7 @@ export default function Home() {
         state.setBpm,
         state.sections,
         state.setSections,
+        state.setInstrumentIDs,
         state.instrumentIDs,
         state.pause,
         state.play,
@@ -119,12 +121,19 @@ export default function Home() {
       if(Object.keys(router.query).length <= 0) return;
       console.log('found state in url, proceeding to load...');
 
-      setSections(queryToSections(router.query));
+      const { sections: loadedSections, instrumentIDs: loadedInstruments } = queryToState(router.query);
+      setSections(loadedSections);
       setBpm(Number(router.query.bpm));
+
+      if (loadedInstruments) {
+        const base = Array.from({ length: 10 }, (v, i) => getNewInstrument(i));
+        loadedInstruments.forEach((id, i) => { base[i] = id; });
+        setInstrumentIDs(base);
+      }
 
       // remove query params
       window.history.replaceState({}, document.title, window.location.pathname);
-  }, [router.query]);
+  }, [router.query, setSections, setBpm, setInstrumentIDs]);
 
   return (
     <div className={styles.container}>
