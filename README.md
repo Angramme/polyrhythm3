@@ -1,3 +1,5 @@
+
+
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fangramme.github.io%2Fpolyrhythm3%2Findex.html&count_bg=%23303250&title_bg=%232D2D2D&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -46,7 +48,7 @@ These buttons are respectively:
     - For example 3:5 is a polyrhythm where in the duration of one bar you get 3 beats and 5 beats simultaneously.
 * SUBDIVIDES: this lets you subdivide every beat into n non-accentuated beats.
 * OFFSETS: this lets you offset every beat by some value. 0 means no offset and 1 means an offset of the length of one beat which is the maximum offset i.e the maximum offset is the `(bar length) / (beat ratio)` 
-* SCALE: this is basically a mutliplier on the bar length.
+* SCALE: this is basically a multiplier on the bar length.
 For example 2 would mean that the current section has a length of 2 bars. Fractions are allowed...
 * REPEAT: how many times to repeat the section
 * SWING: swing amount
